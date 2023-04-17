@@ -1,0 +1,43 @@
+/*
+Approach
+a merging algorithm is used to get one list of values already sort, note that both lists are ordered, so when they are merged into one, the complexity is linear; 
+To calculate the median of a data set newList we can apply the following criteria:
+when the data length n is odd:
+idx=(n+1)/2
+and Median=newList[idx]
+
+when the data length n is even:
+idx1=n/2-1
+idx2=n/2
+and median=(newList[idx1]+newList[idx2])/2
+*/
+# CODE
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int n=nums1.size(),m=nums2.size();
+        int x=(n+m)/2,i=0,i1=0,i2=0,curr=0,prev=0;
+        while(i<=x){
+            prev=curr;
+            if(i1==n){
+                curr=nums2[i2];
+                i2++;
+            }
+            else if(i2==m){
+                curr=nums1[i1];
+                i1++;
+            }
+            else if(nums1[i1]<nums2[i2]){
+                curr=nums1[i1];
+                i1++;
+            }
+            else{
+                curr=nums2[i2];
+                i2++;
+            }
+            i++;
+        }
+        if((n+m)%2==0)return (double)(prev+curr)/2.0;
+        else return curr;
+    }
+};
