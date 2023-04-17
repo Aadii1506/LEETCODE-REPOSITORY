@@ -1,0 +1,52 @@
+/*
+Approach:
+Initialize three pointers, ptr1, ptr2, and head to L1, L2, and L1 respectively. This helps us keep track of the start of the result linked list.
+Initialize variables sum and carry to 0.
+Traverse both the linked lists until either of them is NULL. If a linked list is exhausted, use 0 instead of the corresponding digit for addition.
+Compute the sum of the corresponding digits along with the carry and update sum and carry.
+Create a new node with the value of sum and add it to the result linked list.
+Update L1 to point to the newly created node.
+Reset num1, num2, and sum to 0.
+If carry is non-zero after the above loop, create a new node with value carry and add it to the result linked list.
+Return head->next, which points to the start of the result linked list.
+*/
+
+# CODE
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        if(l1==NULL)return l2;
+        else if(l2==NULL)return l1;
+        int carry=0;
+        ListNode* dum=new ListNode();
+        ListNode* temp=dum;
+        while(l1!=NULL||l2!=NULL||carry){
+            int sum=0;
+            if(l1!=NULL){
+                sum+=l1->val;
+                l1=l1->next;
+            }
+            if(l2!=NULL){
+                sum+=l2->val;
+                l2=l2->next;
+            }
+            sum+=carry;
+            carry=sum/10;
+            ListNode* nwnode=new ListNode(sum%10);
+            temp->next=nwnode;
+            temp=nwnode;
+        }
+        return dum->next;
+    }
+};
