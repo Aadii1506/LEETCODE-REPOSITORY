@@ -1,0 +1,43 @@
+/*
+APPROACH:
+just store the reverse of a number in some other variable and check if they are equal or not and return accordingly
+*/
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x<0)return false;
+        long int n=0,i=10,z=x,c=0;
+        while(z){
+            c++;
+            z/=10;
+        }
+        z=x;
+        while(z){
+            n+=(z%10)*pow(i,c-1);
+            c--;
+            z/=10;
+        }
+        if(n==x)return true;
+        else return false;
+    }
+};
+
+/*
+other approach is to convert given number into string and use 2 pointers one at left and other at right to check each character equal or not
+*/
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x<0)return false;
+        string s=to_string(x);
+        int i=0,j=s.length()-1;
+        while(i<j){
+            if(s[i]!=s[j])return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+};
