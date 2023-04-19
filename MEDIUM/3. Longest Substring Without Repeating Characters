@@ -1,0 +1,24 @@
+/*
+Approach
+Use sliding window with hashset, use left and right pointers to move the window .
+If the set doesn't contains character then first add into the set and calculate the maxLength hand-in-hand...
+if character already present in the set that means you have to move your sliding window by 1 , 
+before that you have to remove all the characters that are infront of the character that is present already in window before.
+Now you have to remove that character also and move the left pointer and also add the new character into the set.
+THAT'S ALL........EASY APPROACH USING SIMPLE HASHSET+SLIDING WINDOW
+*/
+
+# CODE
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        st=set()
+        ans=0
+        l=0
+        for r in range(len(s)):
+            while s[r] in st:
+                st.remove(s[l])
+                l+=1
+            st.add(s[r])
+            ans=max(ans,r-l+1)
+        return ans
+        
