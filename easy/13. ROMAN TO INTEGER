@@ -1,0 +1,33 @@
+/*
+APPROACH
+To solve this problem, we need to create a hash table, the characters in which will correspond to a certain number. 
+Passing along the line, we will check the current and the next character at once, 
+if the current one is greater than the next one, then everything is fine, we add it to the result (it is initially equal to 0), 
+otherwise, we subtract the current value from the next value (for example, the current 10, and the next 100 , we do 100 - 10, and we get 90), 
+we also add to the result and additionally increase the index by 1. As a result, at the end of the loop, we will get the result we need.
+*/
+
+# CODE
+class Solution {
+public:
+    int romanToInt(string s) {
+        unordered_map<char,int> m={
+            {'I',1},
+            {'V',5},
+            {'X',10},
+            {'L',50},
+            {'C',100},
+            {'D',500},
+            {'M',1000},
+        };
+        int ans=0,sz=s.length();
+        for(int i=0;i<sz;i++){
+            if(m[s[i]]<m[s[i+1]]){
+                ans-=m[s[i]];
+            }
+            else
+                ans+=m[s[i]];
+        }
+        return ans;
+    }
+};
