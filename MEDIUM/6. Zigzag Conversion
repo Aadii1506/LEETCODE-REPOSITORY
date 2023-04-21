@@ -1,0 +1,26 @@
+/*
+APPROACH
+1. Create an array of strings of size numrows and using for loop insert character one by one in each row while going down and coming up as in code 
+2. two cases when row==numrow-1 then invert the down var and when row==0 then invert the down var
+3. after fully running the for loop insert each string of array in ans var and return it
+*/
+
+
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        string ar[numRows];
+        if(numRows==1)return s;
+        int n=s.length(),row=0;
+        bool down=true;
+        for(int i=0;i<n;i++){
+            ar[row].push_back(s[i]);
+            if(row==numRows-1)down=false;
+            if(row==0)down=true;
+            down?row++:row--;
+        }
+        string ans="";
+        for(auto i:ar)ans+=i;
+        return ans;
+    }
+};
